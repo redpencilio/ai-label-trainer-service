@@ -1,0 +1,7 @@
+requests
+pytz
+git+https://github.com/stijnrosaer/job-run-loop.git
+pandas
+torch
+torchvision
+transformers
