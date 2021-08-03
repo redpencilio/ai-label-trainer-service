@@ -1,5 +1,5 @@
-from escape_helpers import sparql_escape_uri, sparql_escape_string, sparql_escape_int, sparql_escape_datetime
-from helpers import query, update, generate_uuid
+from mu_sparql_helpers.escape_helpers import sparql_escape_uri, sparql_escape_string, sparql_escape_int, sparql_escape_datetime
+from mu_sparql_helpers.helpers import query, update, generate_uuid
 import os
 from string import Template
 from pytz import timezone

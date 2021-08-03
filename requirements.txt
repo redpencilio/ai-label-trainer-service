@@ -1,6 +1,7 @@
 requests
 pytz
 git+https://github.com/stijnrosaer/job-run-loop.git
+git+https://github.com/stijnrosaer/mu-python-sparql-helper.git
 pandas
 torch
 torchvision

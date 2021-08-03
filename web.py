@@ -1,7 +1,5 @@
 from job_run_loop import start_loop
-from .main import train
-
-app.threaded = True
+from main import train
 
 
 def run(data):

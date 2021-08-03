@@ -7,11 +7,11 @@ from torch.optim import Adam
 from torch.utils.data import SubsetRandomSampler
 from tqdm import tqdm
 from transformers import AutoTokenizer
-from .model import BertClassifier
-from .constants import *
-from .dataModule import SequenceDataset
-from .preprocessor import Preprocessor
-from .utils import seed_everything
+from model import BertClassifier
+from constants import *
+from dataModule import SequenceDataset
+from preprocessor import Preprocessor
+from utils import seed_everything
 from datetime import datetime
 import os
 

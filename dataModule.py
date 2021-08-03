@@ -1,7 +1,7 @@
 import pandas as pd
 from torch.utils.data import Dataset
 
-from .constants import *
+from constants import *
 
 
 class SequenceDataset(Dataset):
