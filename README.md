@@ -44,6 +44,7 @@ import torch
 
 SEP_TOKEN = '[SEP]'
 CLS_TOKEN = '[CLS]'
+MODEL_FILE_PATH = '/share/model/predicate-model.pth'
 BATCH_SIZE = 4
 NUM_EPOCHS = 3
 GRADIENT_ACCUMULATION_STEPS = 8
