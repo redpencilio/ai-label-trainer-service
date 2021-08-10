@@ -97,7 +97,7 @@ def train(data):
             correct_reviews_in_batch = (predicted == labels).sum().item()
             train_correct_total += correct_reviews_in_batch
 
-            writer.add_scalar("Accuracy/train", train_correct_total*100 / ((step+1) * BATCH_SIZE),
+            writer.add_scalar("Accuracy/train", train_correct_total / ((step+1) * BATCH_SIZE),
                               global_step)
 
             global_step += 1
