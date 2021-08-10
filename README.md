@@ -58,6 +58,20 @@ increases performance, but also learning time.
 
 Make sure to mount this python file in the correct location of the container as shown in the docker-compose entry above!
 
+## Tensorboard
+Tensorboard was used to log training loss and accuracy in a dashboard. All data will be written to `share/tb/`.
+In order to start up the dashboard, make sure tensorboard is installed locally with:
+```
+pip install tensorboard
+```
+
+starting tensorboard can now be done by running:
+```
+tensorboard --logdir=share/tb
+```
+
+Tensorboard is now available at `http://localhost:6006` if that port is available, otherwise see terminal for correct port.
+
 ## Reference
 
 ### Environment variables
@@ -86,3 +100,8 @@ Make sure to mount this python file in the correct location of the container as 
 
 - `MU_SPARQL_TIMEOUT` is used to configure the timeout (in seconds) for SPARQL queries.
 
+## Improvements
+
+Every time the model is trained, it is stored on disk under the file name, defined in the config.py file. This means
+that if training is done two times, the original model can be overwritten. The link to this file in the triple store
+will not be changed. So, the older model will no longer be available while the id for this one will give the new model.

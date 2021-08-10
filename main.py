@@ -5,6 +5,7 @@ from torch import Tensor
 import torch.nn as nn
 from torch.optim import Adam
 from torch.utils.data import SubsetRandomSampler
+from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 from transformers import AutoTokenizer
 from model import BertClassifier
@@ -19,8 +20,9 @@ seed_everything(24)
 
 
 
-
 def train(data):
+    writer = SummaryWriter(log_dir=f"/share/tb/{datetime.now().strftime('%b-%d-%Y-%H-%M-%S')}")
+
     # load dutch tokenizer
     tokenizer = AutoTokenizer.from_pretrained("GroNLP/bert-base-dutch-cased")
 
@@ -65,6 +67,7 @@ def train(data):
     model.zero_grad()
     training_acc_list, validation_acc_list = [], []
 
+    global_step = 0
     for epoch in range(NUM_EPOCHS):
         epoch_loss = 0.0
         train_correct_total = 0
@@ -80,6 +83,8 @@ def train(data):
 
             loss = loss_fn(logits, labels)
 
+            writer.add_scalar("Loss/train", loss.item(), global_step)
+
             loss.backward()
 
             epoch_loss += loss.item()
@@ -91,6 +96,11 @@ def train(data):
             _, predicted = torch.max(logits.data, 1)
             correct_reviews_in_batch = (predicted == labels).sum().item()
             train_correct_total += correct_reviews_in_batch
+
+            writer.add_scalar("Accuracy/train", train_correct_total*100 / ((len(train_indices) / BATCH_SIZE) * (step+1)),
+                              global_step)
+
+            global_step += 1
 
         print('Epoch {} - Loss {:.2f}'.format(epoch + 1, epoch_loss / len(train_indices)))
 
@@ -118,5 +128,8 @@ def train(data):
         torch.save(model, MODEL_FILE_PATH[:-4] + f"_epoch-{epoch}" + ".pth")
 
     torch.save(model, MODEL_FILE_PATH)
+
+    writer.flush()
+    writer.close()
 
     return MODEL_FILE_PATH
