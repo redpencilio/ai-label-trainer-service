@@ -129,7 +129,4 @@ def train(data):
 
     torch.save(model, MODEL_FILE_PATH)
 
-    writer.flush()
-    writer.close()
-
     return MODEL_FILE_PATH
